@@ -131,29 +131,29 @@
 ?>
     <div class="container">
         <h1>Новости</h1>
-        <? foreach($news as $article) { 
+        <?php foreach($news as $article) { 
             $source = $article->getSource();
             $comments = $article->getComments($commentJson);
         ?>
         <article class="news-article">
-            <h2 class="news-title"><? echo $article->getId().'. '.$article->getTitle(); ?></h2>    
-            <p class="news-date"><? echo $article->getDate()->format("Y-m-d H:i") ?></p>
+            <h2 class="news-title"><?php echo $article->getId().'. '.$article->getTitle(); ?></h2>    
+            <p class="news-date"><?php echo $article->getDate()->format("Y-m-d H:i") ?></p>
             <hr>
-            <p class="news-content"><? echo $article->getContent() ?></p>
+            <p class="news-content"><?php echo $article->getContent() ?></p>
             <p class="news-source">Источник: 
-                <a href="<? echo $source ?>" target="_blank"><? echo $source ?></a>
+                <a href="<?php echo $source ?>" target="_blank"><?php echo $source ?></a>
             </p>
             <hr>
             <div class="news-comment-box">
-                <p class="news-comment-line">Комментарии[<? echo count($comments); ?>]</p>  
+                <p class="news-comment-line">Комментарии[<?php echo count($comments); ?>]</p>  
 
-                <? foreach ($comments as $comment) { ?>
-                    <p class="news-comment-username"><? echo $comment->getUsername(); ?> написал(а):</p>
-                    <p class="news-comment"><? echo $comment->getContent(); ?></p>
-                <? } ?>
+                <?php foreach ($comments as $comment) { ?>
+                    <p class="news-comment-username"><?php echo $comment->getUsername(); ?> написал(а):</p>
+                    <p class="news-comment"><?php echo $comment->getContent(); ?></p>
+                <?php } ?>
             </div>
         </article>
-        <? } ?>
+        <?php } ?>
     </div>
 </body>
 </html>
