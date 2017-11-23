@@ -44,7 +44,7 @@ class Car
             echo 'Все компоненты цвета должны быть в диапазоне от 0 до 255'.PHP_EOL;
         }
         else {
-            $this->color = $color;
+            $this->color = [$r, $g, $b];
         }
     }
 
