@@ -11,8 +11,6 @@
 
     class News
     {
-        private static $currentId = 0;
-
         private $id;
         private $title;
         private $content;
@@ -20,9 +18,9 @@
         private $date;
         private $comments =[];
 
-        public function __construct($title, $content, $source, $date = null)
+        public function __construct($id, $title, $content, $source, $date = null)
         {
-            $this->id = ++self::$currentId; // Autoincrement id
+            $this->id = $id;
             $this->title = $title;
             $this->content = $content;
             $this->source = $source;
@@ -120,11 +118,17 @@
 
     $json = file_get_contents('json/news.json');
     $data = json_decode($json, true);
+
+    if (!$data) {
+        echo '<p>Ошибка! Данные исходный json-файл невалиден!</p>';
+        exit;
+    }
+
     $news = [];
 
     foreach ($data as $d) {
         $date = new DateTime(isset($d['date']) ? $d['date'] : 'now');
-        $news[] = new News($d['title'], $d['content'], $d['source'], $date);
+        $news[] = new News($d['id'], $d['title'], $d['content'], $d['source'], $date);
     }
 
     $commentJson = file_get_contents('json/comments.json');
